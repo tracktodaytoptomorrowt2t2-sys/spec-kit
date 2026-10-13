@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>T2T2 CA Study Planner — Report</title>
+<style>
+:root{--bg:#fbfaf6;--card:#fff;--ink:#16181d;--mute:#5d6470;--line:#e4e1d8;--a:#e2531f;--b:#1f6f5c;--c:#2b4acb;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101216;--card:#181b21;--ink:#f1efe8;--mute:#9aa1ad;--line:#2a2e36;--a:#ff7a45;--b:#3fbf9f;--c:#7b93ff}}
+:root[data-theme="dark"]{--bg:#101216;--card:#181b21;--ink:#f1efe8;--mute:#9aa1ad;--line:#2a2e36;--a:#ff7a45;--b:#3fbf9f;--c:#7b93ff}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Georgia,'Times New Roman',serif;line-height:1.65;overflow-x:hidden}
+h1,h2,h3,.sans{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+#bar{position:fixed;top:env(safe-area-inset-top,0px);left:0;height:4px;width:0;background:linear-gradient(90deg,var(--a),var(--c));z-index:50}
+.blob{position:fixed;border-radius:50%;filter:blur(70px);opacity:.25;z-index:-1;pointer-events:none}
+.b1{width:360px;height:360px;background:var(--a);top:-80px;left:-80px}.b2{width:420px;height:420px;background:var(--c);bottom:-120px;right:-100px}
+section{max-width:960px;margin:0 auto;padding:90px 22px}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+.tag{font:600 .8rem system-ui;letter-spacing:.18em;text-transform:uppercase;color:var(--a)}
+h1{font-size:clamp(2.6rem,9vw,5.6rem);line-height:1;margin:.3em 0;letter-spacing:-.03em}
+h1 span{display:inline-block;background:linear-gradient(90deg,var(--a),var(--c));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:1.2rem;color:var(--mute);max-width:640px}
+.hint{margin-top:40px;font:.85rem system-ui;color:var(--mute);animation:bob 1.6s infinite}
+@keyframes bob{50%{transform:translateY(8px)}}
+h2{font-size:clamp(1.8rem,5vw,2.8rem);margin:.2em 0 .4em;letter-spacing:-.02em}
+.num{font:700 .9rem system-ui;color:var(--a)}
+p{margin:.6em 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px;margin-top:28px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;transition:transform .3s,box-shadow .3s}
+.card:hover{transform:translateY(-6px);box-shadow:0 14px 34px rgba(0,0,0,.12)}
+.card .ic{font-size:1.9rem}.card h3{margin:.4em 0 .2em;font-size:1.15rem}.card p{color:var(--mute);font-size:.98rem;margin:.3em 0}
+.eg{margin-top:10px;padding:10px 12px;border-left:3px solid var(--a);background:rgba(226,83,31,.07);border-radius:6px;font-size:.9rem}
+/* reveal */
+.rv{opacity:0;transform:translateY(46px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.l{transform:translateX(-60px)}.rv.r{transform:translateX(60px)}.rv.z{transform:scale(.88)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}
+/* timeline */
+.tl{position:relative;margin:50px 0 20px;display:flex;justify-content:space-between;gap:8px}
+.tl:before{content:"";position:absolute;top:30px;left:30px;right:30px;height:4px;background:var(--line)}
+.tl .fill{position:absolute;top:30px;left:30px;height:4px;width:0;background:linear-gradient(90deg,var(--a),var(--c));transition:width 1.8s ease .3s}
+.tl.in .fill{width:calc(100% - 60px)}
+.dot{position:relative;text-align:center;flex:1;font-family:system-ui}
+.dot b{display:grid;place-items:center;width:60px;height:60px;margin:0 auto 8px;border-radius:50%;background:var(--card);border:3px solid var(--a);font-size:1rem;transform:scale(0);transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.tl.in .dot b{transform:scale(1)}.tl.in .dot:nth-child(3) b{transition-delay:.5s}.tl.in .dot:nth-child(4) b{transition-delay:.9s}.tl.in .dot:nth-child(5) b{transition-delay:1.3s}.tl.in .dot:nth-child(6) b{transition-delay:1.7s}
+.dot small{color:var(--mute);font-size:.8rem}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:26px}
+.stat{text-align:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 10px}
+.stat strong{display:block;font:800 2.4rem system-ui;color:var(--a)}.stat span{font:.85rem system-ui;color:var(--mute)}
+/* problems */
+.pr{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:stretch;margin:14px 0}
+.pr>div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;font-size:.95rem}
+.pr .p{border-left:4px solid var(--a)}.pr .s{border-left:4px solid var(--b)}
+.pr .ar{display:grid;place-items:center;background:none;border:0;padding:0;font-size:1.6rem;color:var(--mute)}
+.pr b{font-family:system-ui;display:block;margin-bottom:4px}
+@media(max-width:640px){.pr{grid-template-columns:1fr}.pr .ar{transform:rotate(90deg)}.tl{flex-wrap:wrap;gap:20px}.tl:before,.tl .fill{display:none}.dot{flex:0 0 30%}}
+/* gap */
+.gap{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:24px}
+@media(max-width:640px){.gap{grid-template-columns:1fr}}
+.yes,.no{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px}
+.yes{border-top:5px solid var(--b)}.no{border-top:5px solid var(--a)}
+ul{padding-left:1.1em;margin:.5em 0}li{margin:.35em 0}
+.callout{margin-top:28px;padding:22px;border-radius:18px;background:linear-gradient(135deg,var(--a),var(--c));color:#fff;font:600 1.25rem/1.4 system-ui}
+footer{text-align:center;padding:40px 20px;color:var(--mute);font:.85rem system-ui}
+@media(prefers-reduced-motion:reduce){.rv,.dot b{transition:none;opacity:1;transform:none}.hint{animation:none}.tl .fill{transition:none}}
+</style>
+</head>
+<body>
+<div id="bar"></div><div class="blob b1"></div><div class="blob b2"></div>
+
+<section class="hero">
+  <div class="tag rv">Report · CA Foundation · Inter · Final</div>
+  <h1 class="rv d1">T2T2<br><span>Study Planner</span></h1>
+  <p class="lead rv d2"><b>“Track 2 Today, Top 2 Tomorrow.”</b> A planner that turns a huge CA syllabus into manageable daily work: study, revision, mock tests and progress reports, built around your level and attempt date.</p>
+  <div class="hint">Scroll to explore ↓</div>
+</section>
+
+<section id="intro">
+  <div class="num rv">01 · INTRODUCTION</div>
+  <h2 class="rv d1">Daily work, not a vague to-do list</h2>
+  <p class="rv d2">T2T2 organizes daily study, revision, mock tests and progress reporting around the student’s selected CA level and attempt date. Instead of relying on memory, the student gets a structured plan.</p>
+  <div class="grid">
+    <div class="card rv l"><div class="ic">🎯</div><h3>Core idea</h3><p>Convert a large syllabus into small daily actions.</p></div>
+    <div class="card rv z d1"><div class="ic">📚</div><h3>Three levels</h3><p>CA Foundation, Intermediate and Final routes.</p></div>
+    <div class="card rv r d2"><div class="ic">🤝</div><h3>Documented scope</h3><p>Study tracking, weekly review, analytics, chapter tracking and faculty reports. No built-in student chat or forum.</p></div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="num rv">02 · FEATURES</div>
+  <h2 class="rv d1">What the planner actually does</h2>
+  <div class="grid">
+    <div class="card rv"><div class="ic">⚡</div><h3>Daily Execution</h3>
+      <p>A ranked list of today’s study, revision and practice tasks, so the next action is clear.</p>
+      <p>Mark a task complete and recall sessions get scheduled automatically. Unfinished work stays visible as backlog to be re-planned.</p>
+      <div class="eg">Example: finish a core Accounting task today, then see its recall sessions appear on later dates, alongside Law revision and a Quant practice set.</div></div>
+    <div class="card rv d1"><div class="ic">🗓️</div><h3>Weekly Review &amp; mock tests</h3>
+      <p>The seven-day plan in one view, with a completion indicator per day. It exposes uneven patterns, like a huge Monday and a near-empty Tuesday.</p>
+      <p>Schedule mocks and record results. Submitted results are locked, so they can’t be quietly edited later.</p></div>
+    <div class="card rv d2"><div class="ic">📊</div><h3>Analytics</h3>
+      <p>Study hours vs target, backlog trends, paper-wise risk and revision health, turned into a progress overview.</p>
+      <div class="eg">Example: the paper flagged highest-risk becomes the priority for revision or extra practice.</div></div>
+    <div class="card rv"><div class="ic">📖</div><h3>Chapter tracking</h3>
+      <p>Progress at chapter level, not a rough subject-level guess. Mark complete, rate confidence, and see how many recall sessions each chapter received.</p>
+      <p>Weak chapters stay flagged until a later revision or mock addresses them.</p></div>
+    <div class="card rv d1"><div class="ic">📨</div><h3>Accountability reports</h3>
+      <p>A weekly report with the student’s name, study hours, backlog, 1-4-7-21 adherence and mock scores, shareable via WhatsApp or email.</p>
+      <p>Gives faculty a clearer view than an anonymous summary.</p></div>
+    <div class="card rv d2"><div class="ic">🧭</div><h3>Levels &amp; access</h3>
+      <p>Open your CA level and set an attempt date to organize prep around your own timeline.</p>
+      <p>A faculty Class Register exists (use it on the office machine). Some preview buttons are <b>demo-only</b>, so don’t confuse them with live features.</p></div>
+  </div>
+
+  <h2 class="rv" style="margin-top:70px;font-size:1.6rem">The 1 · 4 · 7 · 21 recall plan</h2>
+  <p class="rv d1">Complete a chapter once and the planner schedules recalls on these days:</p>
+  <div class="tl rv">
+    <div class="fill"></div>
+    <div class="dot"><b>Day 0</b><small>Study</small></div>
+    <div class="dot"><b>+1</b><small>Recall 1</small></div>
+    <div class="dot"><b>+4</b><small>Recall 2</small></div>
+    <div class="dot"><b>+7</b><small>Recall 3</small></div>
+    <div class="dot"><b>+21</b><small>Recall 4</small></div>
+  </div>
+  <div class="stats">
+    <div class="stat rv z"><strong data-n="3">0</strong><span>CA levels</span></div>
+    <div class="stat rv z d1"><strong data-n="4">0</strong><span>recall sessions</span></div>
+    <div class="stat rv z d2"><strong data-n="7">0</strong><span>day weekly view</span></div>
+    <div class="stat rv z d3"><strong data-n="21">0</strong><span>day final recall</span></div>
+  </div>
+</section>
+
+<section id="problems">
+  <div class="num rv">03 · PROBLEMS &amp; SOLUTIONS</div>
+  <h2 class="rv d1">Common CA prep difficulties</h2>
+  <p class="rv d2">Multiple papers, a broad syllabus, practice, revision and mocks: here’s how each pain point maps to a feature.</p>
+  <div class="pr rv"><div class="p"><b>Unclear daily priorities</b>Not knowing what to study first.</div><div class="ar">→</div><div class="s"><b>Ranked daily list</b>Makes the next step concrete.</div></div>
+  <div class="pr rv"><div class="p"><b>Forgetting to revise</b>One pass doesn’t guarantee recall.</div><div class="ar">→</div><div class="s"><b>1-4-7-21 recall</b>Makes revision systematic.</div></div>
+  <div class="pr rv"><div class="p"><b>Accumulating unfinished work</b>Missed tasks vanish from view.</div><div class="ar">→</div><div class="s"><b>Visible backlog</b>Plan how to catch up.</div></div>
+  <div class="pr rv"><div class="p"><b>Uneven preparation</b>Favouring comfortable subjects.</div><div class="ar">→</div><div class="s"><b>Confidence + paper risk</b>Highlights neglected areas.</div></div>
+  <div class="pr rv"><div class="p"><b>Limited evidence of progress</b>“Studying a lot” but no proof.</div><div class="ar">→</div><div class="s"><b>Weekly tracking + analytics</b>A record to review.</div></div>
+  <div class="pr rv"><div class="p"><b>Hard to judge readiness</b>Hours alone don’t say much.</div><div class="ar">→</div><div class="s"><b>Mock scores + confidence</b>Discussion material, not a full readiness measure.</div></div>
+  <p class="rv" style="color:var(--mute);font-size:.9rem">Note: these are common challenges the planner is designed to organize. No survey data shows how often they occur or how much outcomes improve.</p>
+</section>
+
+<section id="comms">
+  <div class="num rv">04 · ONLINE CLASSES &amp; COMMUNICATION</div>
+  <h2 class="rv d1">A limited but useful bridge</h2>
+  <p class="rv d2">Online classes can make it harder to ask questions, compare understanding or get peer support, especially when students hesitate to speak up. That’s a general online-learning concern, not a planner result.</p>
+  <div class="gap">
+    <div class="yes rv l"><h3>✅ What T2T2 offers</h3><ul><li>A named weekly report to share with faculty</li><li>Hours, backlog, revision adherence and mock scores as a starting point for a progress talk</li></ul></div>
+    <div class="no rv r"><h3>⚠️ What it doesn’t document</h3><ul><li>Direct messaging</li><li>Class discussion or Q&amp;A threads</li><li>Peer study groups</li><li>Live interaction</li></ul></div>
+  </div>
+  <p class="rv">So it shouldn’t be pitched as a full solution to the student-to-student communication gap. Its documented role is individual planning and faculty-facing accountability.</p>
+  <h3 class="rv">Suggested companion practices (not confirmed features)</h3>
+  <div class="grid">
+    <div class="card rv z"><div class="ic">🙋</div><h3>Doubt-clearing sessions</h3><p>Regular online sessions.</p></div>
+    <div class="card rv z d1"><div class="ic">👥</div><h3>Peer study groups</h3><p>Small groups for shared understanding.</p></div>
+    <div class="card rv z d2"><div class="ic">💬</div><h3>Feedback on reports</h3><p>Teachers respond to weekly reports.</p></div>
+    <div class="card rv z d3"><div class="ic">🛡️</div><h3>Moderated Q&amp;A space</h3><p>A place for subject questions.</p></div>
+  </div>
+</section>
+
+<section id="verdict">
+  <div class="num rv">05 · BENEFITS, LIMITATIONS, CONCLUSION</div>
+  <h2 class="rv d1">Strengths and honest limits</h2>
+  <div class="gap">
+    <div class="yes rv l"><h3>💪 Strengths</h3><ul><li>Connects daily execution, spaced revision, weekly planning, mock records, chapter confidence, analytics and faculty reporting</li><li>Shows what was planned, done, pending and at risk</li></ul></div>
+    <div class="no rv r"><h3>🧱 Limitations</h3><ul><li>Depends on accurate input and consistent use</li><li>Analytics are only as good as the data recorded</li><li>No built-in peer communication</li></ul></div>
+  </div>
+  <div class="callout rv z">T2T2 is a <u>study organization and accountability planner</u>, not a complete online learning or peer-communication platform.</div>
+  <p class="rv">It helps CA students structure preparation and makes progress easier to discuss with faculty. Peer interaction and doubt-solving need other channels or future features.</p>
+</section>
+
+<footer>Based on the T2T2 CA Study Planner report</footer>
+
+<script>
+(function(){
+var bar=document.getElementById('bar');
+function prog(){var h=document.documentElement.scrollHeight-innerHeight;bar.style.width=(h>0?scrollY/h*100:0)+'%';
+ var b=document.querySelectorAll('.blob');if(b[0])b[0].style.transform='translateY('+scrollY*.15+'px)';if(b[1])b[1].style.transform='translateY('+(-scrollY*.1)+'px)'}
+addEventListener('scroll',prog,{passive:true});prog();
+function count(el){var n=+el.dataset.n,t=0,s=performance.now();(function f(now){t=Math.min(1,(now-s)/1200);el.textContent=Math.round(n*t);if(t<1)requestAnimationFrame(f)})(s)}
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');
+ e.target.querySelectorAll&&e.target.querySelectorAll('[data-n]').forEach(count);
+ var s=e.target.querySelector&&e.target.querySelector('[data-n]');if(!s&&e.target.dataset&&e.target.dataset.n)count(e.target);
+ io.unobserve(e.target)}})},{threshold:.15});
+document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+document.querySelectorAll('.stat strong').forEach(function(el){/* counted when parent reveals */});
+})();
+</script>
+</body>
+</html>
